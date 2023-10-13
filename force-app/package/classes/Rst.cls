@@ -432,12 +432,12 @@ global with sharing class Rst {
         if(this.handleSfResponse){
             switch on this.response.getStatusCode() {
                 // Success responses
-                when 200, 201 {
+                when 200, 201, 202, 204 {
                     return this;
                 }
 
                 // Handle error responses
-                when 400, 401, 404, 405, 500 {
+                when 400, 401, 404, 405, 409, 415, 422, 429, 500 {
 
                    try{
                         // Try to deserialize a JSON response, if this fails throw an exception
@@ -476,6 +476,20 @@ global with sharing class Rst {
         if(errorObject.containsKey('error') && errorObject.containsKey('error_description')){
             throw new RestUtilException(
                 errorObject.get('error') + Rst.SINGLE_ERROR_MESSAGE_DELIMITER + errorObject.get('error_description')
+            );
+
+        // Handle Data Cloud API errors gracefully
+        }else if(errorObject.containsKey('error') && errorObject.containsKey('message')){
+
+            // Get additional details for the data cloud API errors
+            String details = (errorObject.containsKey('details')) ? String.valueOf(errorObject.get('details')) : '';
+
+            // Throw the detailed exception message
+            throw new RestUtilException(
+                errorObject.get('error') + 
+                Rst.SINGLE_ERROR_MESSAGE_DELIMITER + 
+                errorObject.get('message') + 
+                ((String.isNotBlank(details) && details != '{}') ? Rst.SINGLE_ERROR_MESSAGE_DELIMITER + details : '')
             );
         }else{
             this.handleUnknownSfResponse();

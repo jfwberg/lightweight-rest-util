@@ -4,10 +4,10 @@
       "path": "force-app/package",
       "default": true,
       "package": "Lightweight - REST Util",
-      "versionName": "Version 0.4",
-      "versionNumber": "0.4.0.NEXT",
+      "versionName": "Version 0.6",
+      "versionNumber": "0.6.0.NEXT",
       "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
-      "ancestorId": "04tP30000004BZZIA2",
+      "ancestorId": "04tP30000005T4bIAE",
       "dependencies": [
         {
           "package": "Lightweight - Apex Unit Test Util v2@2.0.0-2"
@@ -18,8 +18,8 @@
       "path": "force-app/package",
       "default": false,
       "package": "Lightweight - REST Util (Unlocked)",
-      "versionName": "Version 0.2",
-      "versionNumber": "0.2.0.NEXT",
+      "versionName": "Version 0.6",
+      "versionNumber": "0.6.0.NEXT",
       "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
       "dependencies": [
         {
@@ -40,10 +40,13 @@
     "Lightweight - REST Util@0.1.0-2": "04tP30000003jTdIAI",
     "Lightweight - REST Util@0.2.0-1": "04tP30000003mHpIAI",
     "Lightweight - REST Util@0.3.0-1": "04tP30000004BZZIA2",
+    "Lightweight - REST Util@0.4.0-1": "04tP30000004DTJIA2",
+    "Lightweight - REST Util@0.5.0-1": "04tP30000005T4bIAE",
     "Lightweight - REST Util (Unlocked)": "0HoP3000000001dKAA",
     "Lightweight - REST Util (Unlocked)@0.1.0-1": "04tP30000003ksjIAA",
     "Lightweight - REST Util (Unlocked)@0.1.0-2": "04tP30000003m1hIAA",
     "Lightweight - REST Util (Unlocked)@0.2.0-1": "04tP30000004BPtIAM",
-    "Lightweight - REST Util@0.4.0-1": "04tP30000004DTJIA2"
+    "Lightweight - REST Util (Unlocked)@0.3.0-1": "04tP30000005T9RIAU",
+    "Lightweight - REST Util@0.6.0-1": "04tP30000006WejIAE"
   }
 }

@@ -397,6 +397,105 @@ private with sharing class RstTest {
 
 
     @IsTest
+    static void testFailedCalloutErrorObjectForDataCloud(){
+        // Rst Instance for testing
+        Rst callout;
+
+        // Object to hold the exception
+        Exception testExecption;
+
+        // The response
+        String response = '{"timestamp":"2023-10-05T08:20:14.535Z","error":"Method Not Allowed","message":"Request method \'POST\' not supported","path":"uri=/query/v1/metadata","tenantId":"a360/prod3/bea0e43df00943bf8ab7fe09baadc182","internalErrorCode":"COMMON_ERROR_HTTP_REQUEST_METHOD_NOT_SUPPORTED","details":{}}';
+        
+        // Method and overloads to set a SINGLE Mock response
+        utl.Mck.setResponse(
+            415,
+            response
+        );
+
+        // Set the mock for the test
+        Test.setMock(HttpCalloutMock.class, utl.Mck.getInstance());
+
+        // Run test
+        Test.startTest();
+        
+        // Execute the test
+        System.runAs(TST_USER){
+            try{
+                callout = new Rst(true).call();
+                
+                // This fails the test if reached
+                utl.Tst.assertExceptionHasBeenThrow();
+
+            }catch(Exception e){
+                testExecption = e;
+            }
+        }
+        Test.stopTest();
+
+        // Assert execution time
+        Assert.areEqual(
+            'Method Not Allowed' + Rst.SINGLE_ERROR_MESSAGE_DELIMITER + 'Request method \'POST\' not supported',
+            testExecption.getMessage(),
+            'Unexpected exception message'
+        );
+    }
+
+
+    @IsTest
+    static void testFailedCalloutErrorObjectWithDetailsForDataCloud(){
+        // Rst Instance for testing
+        Rst callout;
+
+        // Object to hold the exception
+        Exception testExecption;
+
+        // The response
+        String response = '{ "timestamp": "2021-08-20T16:34:26.047666Z", "error": "Bad Request", "message": "Bad Request: JSON is properly formatted but has a mismatch with Schema.", "path": "uri=/api/v1/ingest/sources/ecomm/Orders/actions/test", "tenantId": "{tenantId}", "internalErrorCode": "COMMON_ERROR_GENERIC", "details": { "validationReport": [ { "record": { "contact_name": "Joe Smith", "total": 77506, "tax_exempt": false, "id": "f19cae7e-5cdb-41ce-92ba-539afea04f9d", "created_date": "2021-07-22T08:57:08.118Z", "ship_address": "9818 Main", "modified_date": "2021-07-05T09:31:44.457Z", "tax_rate": 84 }, "causingExceptions": [ "#/id: expected type: Number, found: String" ] }, { "record": { "contact_name": "Tina Smith", "total": 16986, "tax_exempt": false, "id": "48c8b6a6-8179-4a15-ba19-ec5c8206ce28", "created_date": "2021-07-08T22:57:02.008Z", "ship_address": "245 Main", "modified_date": "2021-07-03T06:20:52.886Z", "tax_rate": 61 }, "causingExceptions": [ "#/id: expected type: Number, found: String" ] } ] } }';
+        
+        // Method and overloads to set a SINGLE Mock response
+        utl.Mck.setResponse(
+            429,
+            response
+        );
+
+        // Set the mock for the test
+        Test.setMock(HttpCalloutMock.class, utl.Mck.getInstance());
+
+        // Run test
+        Test.startTest();
+        
+        // Execute the test
+        System.runAs(TST_USER){
+            try{
+                callout = new Rst(true).call();
+                
+                // This fails the test if reached
+                utl.Tst.assertExceptionHasBeenThrow();
+
+            }catch(Exception e){
+                testExecption = e;
+            }
+        }
+        Test.stopTest();
+
+        // A joyful join :-)
+        String expected = 
+            'Bad Request' + 
+            Rst.SINGLE_ERROR_MESSAGE_DELIMITER + 
+            'Bad Request: JSON is properly formatted but has a mismatch with Schema.' + 
+            Rst.SINGLE_ERROR_MESSAGE_DELIMITER + '{validationReport=({causingExceptions=(#/id: expected type: Number, found: String), record={contact_name=Joe Smith, created_date=2021-07-22T08:57:08.118Z, id=f19cae7e-5cdb-41ce-92ba-539afea04f9d, modified_date=2021-07-05T09:31:44.457Z, ship_address=9818 Main, tax_exempt=false, tax_rate=84, total=77506}}, {causingExceptions=(#/id: expected type: Number, found: String), record={contact_name=Tina Smith, created_date=2021-07-08T22:57:02.008Z, id=48c8b6a6-8179-4a15-ba19-ec5c8206ce28, modified_date=2021-07-03T06:20:52.886Z, ship_address=245 Main, tax_exempt=false, tax_rate=61, total=16986}})}';
+
+        // Assert execution time
+        Assert.areEqual(
+            expected,
+            testExecption.getMessage(),
+            'Unexpected exception message'
+        );
+    }
+
+
+    @IsTest
     @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveAsserts')
     static void testFailedCalloutErrorList(){
         // Rst Instance for testing

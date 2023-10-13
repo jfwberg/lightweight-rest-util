@@ -5,7 +5,7 @@ A lightweight Apex utility for executing (Salesforce) REST based APIs
 This is very lightweight REST utility designed to work with Salesforce REST APIs yet flexible enough be used for any REST based API call.
 It is focussed around OAuth authenticated APIs with a Bearer token for authentication and could be used in combination with other (logging) libraries as well.
 
-This utility handles the standard Salesforce API error codes 200, 201, 400, 401, 404, 405 and 500 HTTP Response status codes.
+This utility handles the standard Salesforce API error codes 200, 201, 400, 401, 404, 405, 415 and 500 HTTP Response status codes.
 It will handle the JSON error responses and throw an ```utl.RestUtilException``` with the error message(s) from the reponse that the consuming code can handle accordingly.
 
 It's designed to work with method chaining so that full callouts can be performed in a single line without the need for verbose class construction on larger configurations.
