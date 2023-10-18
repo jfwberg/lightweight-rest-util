@@ -173,7 +173,7 @@ private with sharing class RstTest {
 
         // Validate endpoint URL
         Assert.areEqual(
-            URL.getOrgDomainUrl().toExternalForm() + '/services/data/v58.0',
+            URL.getOrgDomainUrl().toExternalForm() + '/services/data/v59.0',
             callout.getRequest().getEndpoint(),
             'Unexpected endpoint value'
         );
@@ -210,14 +210,14 @@ private with sharing class RstTest {
         Test.startTest();
         System.runAs(TST_USER){
             callout = new Rst('ncName',true)
-            .setApiVersion('v58.0')
+            .setApiVersion('v59.0')
             .setupRequest();
         }
         Test.stopTest();
 
         // Validate endpoint URL
         Assert.areEqual(
-            'callout:ncName/services/data/v58.0',
+            'callout:ncName/services/data/v59.0',
             callout.getRequest().getEndpoint(),
             'Unexpected endpoint value'
         );
@@ -271,6 +271,10 @@ private with sharing class RstTest {
                 .setBody('{"success" : true}')
                 .setHeader('debug', '1')
                 .setHeader('debug', null)
+                .setRequestIdHeader('requestId')
+                .setCorrelationIdHeader('correlationId')
+                .setPrettyPrintHeader(true)
+                .setContentTypeHeaderToXml()
                 .setupRequest();
         }
         Test.stopTest();
@@ -301,6 +305,71 @@ private with sharing class RstTest {
             '{"success" : true}' ,
             callout.getRequest().getBody(),
             'Unexpected HTTP Method'
+        );
+
+        // Assert responseId
+        Assert.areEqual(
+            'requestId' ,
+            callout.getRequestId(),
+            'Unexpected requestId'
+        );
+
+        // Assert correlationId
+        Assert.areEqual(
+            'correlationId' ,
+            callout.getCorrelationId(),
+            'Unexpected correlationId'
+        );
+
+        // Assert correlationId
+        Assert.areEqual(
+            'text/xml; charset=UTF-8;' ,
+            callout.getRequest().getHeader('Content-Type'),
+            'Unexpected content type'
+        ); 
+
+    }
+
+
+    /**
+     * @description Method to test the setter methods
+     */
+    @IsTest
+    static void testUrlEncodedForm(){
+        // Rst Instance for testing
+        Rst callout;
+            
+        // Run test
+        Test.startTest();
+        System.runAs(TST_USER){
+            callout = new Rst()
+                .setEndpoint(Rst.TEST_ENDPOINT)
+                .setHandleSfEndpoint(true)
+                .setHandleSfResponse(true)
+                .setContentTypeHeaderToFormUrlEncoded(new Map<String,String>{'query' => 'SELECT Id FROM Account'})
+                .setupRequest();
+        }
+        Test.stopTest();
+
+        // Assert method
+        Assert.areEqual(
+            'POST' ,
+            callout.getRequest().getMethod(),
+            'Unexpected HTTP Method'
+        );
+
+        // Assert correlationId
+        Assert.areEqual(
+            'application/x-www-form-urlencoded' ,
+            callout.getRequest().getHeader('Content-Type'),
+            'Unexpected content type'
+        );
+
+        // Assert responseId
+        Assert.areEqual(
+            'query=SELECT+Id+FROM+Account' ,
+            callout.getRequest().getBody(),
+            'Unexpected requestId'
         );
     }
 
@@ -541,6 +610,7 @@ private with sharing class RstTest {
     }
 
 
+
     @IsTest
     @SuppressWarnings('PMD.ApexUnitTestClassShouldHaveAsserts')
     static void testFailedCalloutUnknownResponse(){
@@ -579,4 +649,51 @@ private with sharing class RstTest {
         // Assert the exception message   
         utl.Tst.assertExceptionMessage(Rst.UNKNOWN_API_RESPONSE_MSG, response, testExecption);
     }
+
+
+    /** **************************************************************************************************** **
+     **                                        GLOBAL UTILITY METHODS                                        **
+     ** **************************************************************************************************** **/
+    @IsTest
+    static void testValidateNamedCredentials(){
+    
+        // Test with null value will work during test
+        Rst.validateNamedCredentials(new Set<String>());
+
+        try{
+            // Test with an invalid exception
+            Rst.validateNamedCredentials(new Set<String>{'Invalid'});
+
+            // This fails the test if reached
+            utl.Tst.assertExceptionHasBeenThrow();
+
+        }catch(Exception e){
+            // Assert the exception message   
+            utl.Tst.assertExceptionMessage(Rst.INVALID_NAMED_CREDENTIAL_MSG, 'Invalid', e);
+        }
+    }
+
+
+    @IsTest
+    static void testBase64UrlEncode(){
+        Assert.areEqual(
+            'YWI_X2Fi',
+            Rst.base64UrlEncode(Blob.valueOf('ab?_ab')),
+            'Unexpected B64 URL encoding'
+        );
+    }
+
+
+    @IsTest
+    static void testGuid(){
+		for(Integer x = 0; x < 100; x++) {
+            Assert.areEqual(
+                true,
+                Pattern.compile('[\\w]{8}-[\\w]{4}-4[\\w]{3}-[89ab][\\w]{3}-[\\w]{12}').matcher(Rst.guid()).matches(),
+                'Invalid GUID generated'
+            );
+		}
+    }
+		
+	
 }

@@ -4,7 +4,7 @@ REM *****************************
 
 REM Config
 SET testOrg=orgAlias
-SET packageVersionId=04tP30000005T4bIAE
+SET packageVersionId=04tP300000079D3IAI
 SET dependencyVersionId=04t4K000002JvUDQA0
 
 REM Install the package dependencies
