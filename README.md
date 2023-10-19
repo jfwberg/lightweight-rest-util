@@ -17,17 +17,17 @@ If you use the *managed package* you need to installed the managed package depen
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex Unit Test Util v2|
-|Version|2.1.0-2|
-|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000006pflIAA*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000006pUUIAY*
+|Version|2.2.0-2|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007Ez7IAE*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007F3xIAE*
 
 ## REST Util - Package info
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex REST Util|
-|Version|0.7.0-1|
-|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP300000079D3IAI*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP300000079JVIAY*
+|Version|0.9.0-1|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007FOvIAM*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007FVNIA2*
 
 ## Default values
 - Timeout     : 120,000ms
@@ -35,6 +35,16 @@ If you use the *managed package* you need to installed the managed package depen
 - Endpoint    : ''
 - API Version : 'v59.0' (Salesforce Constructor Only)
 - Content-Type: 'application/json;charset=UTF-8'
+
+## Note on Unit tests
+You cannot execute the ```Test.setMock()``` class for http callouts in namespaced packages.
+To test your callouts made though this utility you need to leverage the ```utl.Mck``` [class and methods](https://github.com/jfwberg/lightweight-apex-unit-test-util-v2).
+
+Example implementation in your *TEST method*:
+```java
+// Setup the mock response
+utl.Mck.setResponse(200, '{"SUCCESS": true}');
+```
 
 # Constructors
 The basic setup is by constructing a ```util.Rst()``` object and chain methods to set it up, execute it and get the response.
@@ -136,6 +146,11 @@ setBody(String body)
 // If you want to remove a header set the value to null
 // Customer headers will override default headers
 setHeader(String key, String value)
+
+// Method to set a mockResponseIdentifier so you can specify what utl.Mck instance is returned
+// This is option for Apex testing and required when you work with multiple calls in the same logic
+// Match mockResponseIdentifier in the utl.Mck.addResponse(mockResponseIdentifier,200,payload)
+setMockResponseIdentifier(String mockResponseIdentifier)
 
 // Sets the X-PrettyPrint header to value to '1' or '0'
 // Should be turned off in production, but can be used for 

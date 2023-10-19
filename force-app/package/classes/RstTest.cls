@@ -253,9 +253,13 @@ private with sharing class RstTest {
      */
     @IsTest
     static void testSetters(){
+        
         // Rst Instance for testing
         Rst callout;
-            
+
+        // Add a response to prevent any errors and test the mock response identifier
+        utl.Mck.addResponse('MyMockResponseIdentifier', 400, 'SUCCESS');
+        
         // Run test
         Test.startTest();
         System.runAs(TST_USER){
@@ -275,6 +279,7 @@ private with sharing class RstTest {
                 .setCorrelationIdHeader('correlationId')
                 .setPrettyPrintHeader(true)
                 .setContentTypeHeaderToXml()
+                .setMockResponseIdentifier('MyMockResponseIdentifier')
                 .setupRequest();
         }
         Test.stopTest();
@@ -328,6 +333,19 @@ private with sharing class RstTest {
             'Unexpected content type'
         ); 
 
+        // Assert Mock response set through the utility
+        Assert.areEqual(
+            'SUCCESS' ,
+            utl.Mck.getInstance().respond(null).getBody(),
+            'Unexpected test mock body'
+        );
+
+        // Assert Mock status code set through the utility
+         Assert.areEqual(
+            400,
+            utl.Mck.getInstance().respond(null).getStatusCode(),
+            'Unexpected test mock status code'
+        );
     }
 
 
@@ -406,7 +424,7 @@ private with sharing class RstTest {
         // Assert execution time
         Assert.areEqual(
             true,
-            callout.getExecutionTime() != null && callout.getExecutionTime() > 0,
+            callout.getExecutionTime() != null,
             'Expected execution time to exist'
         );
 

@@ -1,56 +1,58 @@
 {
-  "packageDirectories": [
-    {
-      "path": "force-app/package",
-      "default": true,
-      "package": "Lightweight - REST Util",
-      "versionName": "v59.0 - 0.2",
-      "versionNumber": "0.8.0.NEXT",
-      "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
-      "ancestorId": "04tP30000006q7BIAQ",
-      "dependencies": [
+    "packageDirectories": [
         {
-          "package": "Lightweight - Apex Unit Test Util v2@2.1.0-2"
-        }
-      ]
-    },
-    {
-      "path": "force-app/package",
-      "default": false,
-      "package": "Lightweight - REST Util (Unlocked)",
-      "versionName": "v59.0 - 0.2",
-      "versionNumber": "0.8.0.NEXT",
-      "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
-      "dependencies": [
+            "path": "force-app/package",
+            "default": true,
+            "package": "Lightweight - REST Util",
+            "versionName": "v59.0 - 0.3",
+            "versionNumber": "0.9.0.NEXT",
+            "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
+            "ancestorId": "04tP300000079D3IAI",
+            "dependencies": [
+                {
+                    "package": "Lightweight - Apex Unit Test Util v2@2.2.0-1"
+                }
+            ]
+        },
         {
-          "package": "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.1.0-2"
+            "path": "force-app/package",
+            "default": false,
+            "package": "Lightweight - REST Util (Unlocked)",
+            "versionName": "v59.0 - 0.3",
+            "versionNumber": "0.9.0.NEXT",
+            "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
+            "dependencies": [
+                {
+                    "package": "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.2.0-1"
+                }
+            ]
         }
-      ]
+    ],
+    "name": "lightweight-rest-util",
+    "namespace": "utl",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "59.0",
+    "packageAliases": {
+        "Lightweight - Apex Unit Test Util v2@2.2.0-1": "04tP30000007Ez7IAE",
+        "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.2.0-1": "04tP30000007F3xIAE",
+        "Lightweight - REST Util": "0HoP30000000001KAA",
+        "Lightweight - REST Util@0.1.0-1": "04tP30000003jDVIAY",
+        "Lightweight - REST Util@0.1.0-2": "04tP30000003jTdIAI",
+        "Lightweight - REST Util@0.2.0-1": "04tP30000003mHpIAI",
+        "Lightweight - REST Util@0.3.0-1": "04tP30000004BZZIA2",
+        "Lightweight - REST Util@0.4.0-1": "04tP30000004DTJIA2",
+        "Lightweight - REST Util@0.5.0-1": "04tP30000005T4bIAE",
+        "Lightweight - REST Util@0.6.0-1": "04tP30000006WejIAE",
+        "Lightweight - REST Util@0.7.0-1": "04tP30000006q7BIAQ",
+        "Lightweight - REST Util@0.8.0-1": "04tP300000079D3IAI",
+        "Lightweight - REST Util@0.9.0-1": "04tP30000007FOvIAM",
+        "Lightweight - REST Util (Unlocked)": "0HoP3000000001dKAA",
+        "Lightweight - REST Util (Unlocked)@0.1.0-1": "04tP30000003ksjIAA",
+        "Lightweight - REST Util (Unlocked)@0.1.0-2": "04tP30000003m1hIAA",
+        "Lightweight - REST Util (Unlocked)@0.2.0-1": "04tP30000004BPtIAM",
+        "Lightweight - REST Util (Unlocked)@0.3.0-1": "04tP30000005T9RIAU",
+        "Lightweight - REST Util (Unlocked)@0.7.0-1": "04tP30000006qAPIAY",
+        "Lightweight - REST Util (Unlocked)@0.8.0-1": "04tP300000079JVIAY",
+        "Lightweight - REST Util (Unlocked)@0.9.0-1": "04tP30000007FVNIA2"
     }
-  ],
-  "name": "lightweight-rest-util",
-  "namespace": "utl",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "59.0",
-  "packageAliases": {
-    "Lightweight - Apex Unit Test Util v2@2.1.0-2": "04tP30000006pflIAA",
-    "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.1.0-2": "04tP30000006pUUIAY",
-    "Lightweight - REST Util": "0HoP30000000001KAA",
-    "Lightweight - REST Util@0.1.0-1": "04tP30000003jDVIAY",
-    "Lightweight - REST Util@0.1.0-2": "04tP30000003jTdIAI",
-    "Lightweight - REST Util@0.2.0-1": "04tP30000003mHpIAI",
-    "Lightweight - REST Util@0.3.0-1": "04tP30000004BZZIA2",
-    "Lightweight - REST Util@0.4.0-1": "04tP30000004DTJIA2",
-    "Lightweight - REST Util@0.5.0-1": "04tP30000005T4bIAE",
-    "Lightweight - REST Util@0.6.0-1": "04tP30000006WejIAE",
-    "Lightweight - REST Util@0.7.0-1": "04tP30000006q7BIAQ",
-    "Lightweight - REST Util@0.8.0-1": "04tP300000079D3IAI",
-    "Lightweight - REST Util (Unlocked)": "0HoP3000000001dKAA",
-    "Lightweight - REST Util (Unlocked)@0.1.0-1": "04tP30000003ksjIAA",
-    "Lightweight - REST Util (Unlocked)@0.1.0-2": "04tP30000003m1hIAA",
-    "Lightweight - REST Util (Unlocked)@0.2.0-1": "04tP30000004BPtIAM",
-    "Lightweight - REST Util (Unlocked)@0.3.0-1": "04tP30000005T9RIAU",
-    "Lightweight - REST Util (Unlocked)@0.7.0-1": "04tP30000006qAPIAY",
-    "Lightweight - REST Util (Unlocked)@0.8.0-1": "04tP300000079JVIAY"
-  }
 }

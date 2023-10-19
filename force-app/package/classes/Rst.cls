@@ -1,8 +1,9 @@
 /**
+ * @author         Justus van den Berg (jfwberg@gmail.com)
+ * @date           August 2023
+ * @copyright      (c) 2023 Justus van den Berg
+ * @license        MIT (See LICENSE file in the project root)
  * @description A lightweight Apex utility for executing (Salesforce) REST based APIs
- * @author      Justus van den Berg (jfwberg@gmail.com)
- * @date        September 2023
- * @license     See License file in the project root
  * @note The bearerToken is transient so it won't be exposed when serialized
  *       This should never happen due to the JsonAccess, but just in case we
  *       should handle secrets securely. The value is also cleared after the callout
@@ -36,6 +37,10 @@ global with sharing class Rst {
 
     // Create an empty header map
     private Map<String,String> headers = new Map<String,String>();
+
+    // An optional identifier that can be added to call a specific Callout Mock Template
+    // This leverages the utl.Mck class from the test package 
+    private String mockResponseIdentifier;
 
     // Variable holding the request and response of the last execution, accessible for debug reasons
     private HttpRequest  request  = new HttpRequest();
@@ -258,6 +263,18 @@ global with sharing class Rst {
 
 
     /**
+     * @description Method to set a mockResponseIdentifier so you can specify what utl.Mck is returned
+                    response is returned during an Apex Unit Test.
+     * @param mockResponseIdentifier   The value for the mockResponseIdentifier
+     * @return this
+     */
+    global Rst setMockResponseIdentifier(String mockResponseIdentifier){
+        this.mockResponseIdentifier = mockResponseIdentifier;
+        return this;
+    }
+
+
+    /**
      * @description Method to set the X-PrettyPrint header to value '1'
      * @param prettyPrint The value for the value
      * @return this
@@ -398,6 +415,11 @@ global with sharing class Rst {
         this.request.setEndpoint(this.generateFullEndpoint());
         this.generateHeaders();
 
+        // Check if the request has a specific mock response identifier
+        if(!String.isBlank(this.mockResponseIdentifier)){
+            utl.Mck.setResponseIdentifier(this.mockResponseIdentifier);
+        }
+
         // Set the body and Content-Length header for put, post, patch calls
         if(Rst.METHODS_REQUIRING_BODY.contains(method)){
            
@@ -426,8 +448,8 @@ global with sharing class Rst {
             // Set start date
             Integer startDateTime = Integer.valueOf(Datetime.now().millisecond());
 
-            // Send the request
-            this.response = new Http().send(this.request);
+            // Send the request or send a Mock Response whilst running an apex test
+            this.response = (!Test.isRunningTest()) ? new Http().send(this.request) : utl.Mck.getInstance().respond(this.request);
 
             // Calculate call duration in milliseconds
             this.executionTime = (Integer.valueOf(Datetime.now().millisecond()) - startDateTime);
