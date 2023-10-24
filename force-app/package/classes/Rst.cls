@@ -69,9 +69,7 @@ global with sharing class Rst {
 	@TestVisible private static final String AUTH_HEADER = 'Authorization';
     @TestVisible private static final String AUTH_HEADER_HIDDEN_MESSAGE = '[BEARER_TOKEN_HIDDEN]';
     @TestVisible private static final String LIGHTNING_UI_DISPLAY_THEME = 'Theme4d';
-    @TestVisible private static final String ERROR_DELIMITER = ', ';
-    @TestVisible private static final String SINGLE_ERROR_MESSAGE_DELIMITER = ' :: ';
-
+    
     // Test related constants
     @TestVisible private static final String TEST_SESSION_ID  = '[SESSION_ID]';
     @TestVisible private static final String TEST_ENDPOINT    = '/sobjects/account/describe';
@@ -83,7 +81,15 @@ global with sharing class Rst {
 
     // Error messages
     @TestVisible private static final String UNKNOWN_API_RESPONSE_MSG     = 'Unknown API  Response body: {0}';
-    @TestVisible private final static String INVALID_NAMED_CREDENTIAL_MSG = 'No NamedCredential record with the DeveloperName "{0}" found in the metadata.';
+    @TestVisible private static final String INVALID_NAMED_CREDENTIAL_MSG = 'No NamedCredential record with the DeveloperName "{0}" found in the metadata.';
+
+
+    /** **************************************************************************************************** **
+     **                                          GLOBAL CONSTANTS                                           **
+     ** **************************************************************************************************** **/
+    // Error delimiters are global so they can be safely tested in an external class
+    global static final String ERROR_DELIMITER = ', ';
+    global static final String SINGLE_ERROR_MESSAGE_DELIMITER = ' :: ';
 
 
     /** **************************************************************************************************** **
@@ -380,7 +386,7 @@ global with sharing class Rst {
         return this.executionTime;
     }
 
-    
+
     /**
      * @description Method to get a VF API enabled session Id for local session.
      *              Calls a VF page and extracts the session Id, this is quite a hack but allowed in AppExchange reviews
@@ -395,7 +401,7 @@ global with sharing class Rst {
                 (System.Request.getCurrent().getQuiddity() == Quiddity.AURA || UserInfo.getUiThemeDisplayed() == LIGHTNING_UI_DISPLAY_THEME) ?
                     Page.getSessionId.getContent().toString().trim() :
                     UserInfo.getSessionId();
-    }
+    }    
 
 
     /** **************************************************************************************************** **
@@ -477,8 +483,6 @@ global with sharing class Rst {
      **                                        GLOBAL UTILITY METHODS                                        **
      ** **************************************************************************************************** **/
     /**
-     * 
-     * 
      * @description Method for encoding a Blob into a Base64 URL encoded String.
      *              This is required for generating the JWS
      * @param       input The input Blob to convert to a Base64Url Encoded String
