@@ -17,17 +17,19 @@ If you use the *managed package* you need to installed the managed package depen
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex Unit Test Util v2|
-|Version|2.2.0-2|
-|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007Ez7IAE*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007F3xIAE*
+|Version|2.3.0-1|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007oePIAQ*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007og1IAA*
+|Github URL | https://github.com/jfwberg/lightweight-apex-unit-test-util-v2
 
 ## REST Util - Package info
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex REST Util|
-|Version|0.9.0-1|
+|Version|0.10.0-1|
 |Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007FOvIAM*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007FVNIA2*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007FVNIA2* 
+
 
 ## Default values
 - Timeout     : 120,000ms
