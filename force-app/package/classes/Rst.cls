@@ -25,7 +25,7 @@ global with sharing class Rst {
     private transient String bearerToken;
 
     // Default API Configuration
-    private String  apiVersion = 'v59.0';
+    private String  apiVersion = 'v60.0';
     private String  endpoint   = '';
     private Integer	timeout	   = 120000;
     private String  method     = 'GET';
@@ -62,9 +62,6 @@ global with sharing class Rst {
     /** **************************************************************************************************** **
      **                                          PRIVATE CONSTANTS                                           **
      ** **************************************************************************************************** **/
-    // Hex map for generation a proper UUID
-    private static final String[] HEX_MAP = new String[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-
     // Values
 	@TestVisible private static final String AUTH_HEADER = 'Authorization';
     @TestVisible private static final String AUTH_HEADER_HIDDEN_MESSAGE = '[BEARER_TOKEN_HIDDEN]';
@@ -74,7 +71,7 @@ global with sharing class Rst {
     @TestVisible private static final String TEST_SESSION_ID  = '[SESSION_ID]';
     @TestVisible private static final String TEST_ENDPOINT    = '/sobjects/account/describe';
     @TestVisible private static final String TEST_MY_DOMAIN   = 'https://mydomain.my.salesforce.com';
-    @TestVisible private static final String TEST_API_VERSION = 'v59.0';
+    @TestVisible private static final String TEST_API_VERSION = 'v60.0';
 
     // Http methods that require a post body
     @TestVisible private static final Set<String> METHODS_REQUIRING_BODY = new Set<String>{'POST','PUT','PATCH'};
@@ -87,6 +84,9 @@ global with sharing class Rst {
     /** **************************************************************************************************** **
      **                                          GLOBAL CONSTANTS                                           **
      ** **************************************************************************************************** **/
+    // Package permission set name
+    global static final String PERMISSION_SET_NAME = 'Lightweight_REST_Util';
+
     // Error delimiters are global so they can be safely tested in an external class
     global static final String ERROR_DELIMITER = ', ';
     global static final String SINGLE_ERROR_MESSAGE_DELIMITER = ' :: ';
@@ -209,7 +209,7 @@ global with sharing class Rst {
 
 
     /**
-     * @description The API version in full format i.e. v59.0
+     * @description The API version in full format i.e. v60.0
      * @param apiVersion The value to assign
      * @return this
      */
@@ -220,7 +220,7 @@ global with sharing class Rst {
 
 
     /**
-     * @description The endpoint that comes after the base url i.e. /services/data/v59.0/sobjects/accounts/describe
+     * @description The endpoint that comes after the base url i.e. /services/data/v60.0/sobjects/accounts/describe
      * @param endpoint The value to assign
      * @return this
      */
@@ -531,30 +531,11 @@ global with sharing class Rst {
 
 
     /**
-     * description Based on "NotDan" his solution from stack exchange question 4073
-     *             https://stackoverflow.com/a/13465128
-     *             Method to generate a GUID that is compliant with the standards
-     * @return a GUID
+     * description Method to generate a GUID, upgraded to the standard Salesforce method
+     * @return a GUID string
      */
     global static String guid() {        
-        String  randomStringAsHex    = EncodingUtil.ConvertTohex(Crypto.GenerateAESKey(128));
-        String  versionHexBits       = randomStringAsHex.SubString(14,16);
-        String  variantHexBits	     = randomStringAsHex.SubString(18,20);
-        Integer versionIntBits       = convertHexToInt(versionHexBits);
-        Integer variantIntBits       = convertHexToInt(variantHexBits);
-        Integer versionShiftedIntBits= versionIntBits & 15 | 64;
-        Integer variantShiftedIntBits= variantIntBits & 63 | 128;
-        String  versionShiftedHexBits= convertIntToHex(versionShiftedIntBits);
-        String  variantShiftedHexBits= convertIntToHex(variantShiftedIntBits);
-        
-        // Return a new GUID
-        return	randomStringAsHex.SubString(0,8)	+ '-' + 
-                randomStringAsHex.SubString(8,12)	+ '-' +
-                versionShiftedHexBits               + 
-                randomStringAsHex.SubString(14,16)	+ '-' +
-                variantShiftedHexBits               + 
-                randomStringAsHex.SubString(18,20)	+ '-' +
-                randomStringAsHex.substring(20); 
+        return UUID.randomUUID().toString();
     }
 
 
@@ -628,7 +609,7 @@ global with sharing class Rst {
 
         // If there is no content type set, override it with a default content type
         if(!this.headers.containsKey('Content-Type')){
-            this.request.setHeader('Content-Type', 'application/json;charset=UTF-8');
+            this.request.setHeader(  'Content-Type', 'application/json;charset=UTF-8');
         }
 
         // When there is no named credential, populate the Session Id as the bearer token
@@ -760,31 +741,6 @@ global with sharing class Rst {
     private void handleUnknownSfResponse(){
         throw new RestUtilException(String.format(Rst.UNKNOWN_API_RESPONSE_MSG, new String[]{this.response?.getBody()}));
     }
-
-
-    /**
-     * @description Method to convert a HEX value to INT value required by the guid() method
-     * @param hex The hex value
-     * @return The integer value
-     */
-    private static Integer convertHexToInt(String hexval) {
-		Integer d0 = HEX_MAP.indexOf(hexval.substring(1,2));
-		Integer d1 = HEX_MAP.indexOf(hexval.substring(0,1));
-		Integer intval = d0 + (d1*16);
-		return intval;
-	}
-
-
-    /**
-     * @description Method to convert a HEX value to INT value required by the guid() method
-     * @param intval The integer value
-     * @return The HEX  value
-     */
-	private static String convertIntToHex(Integer intval) {
-		String hs0 = HEX_MAP.get(intval & 15); // i & 0x0f
-		String hs1 = HEX_MAP.get(((intval >> 4) & 15)); //(i >> 4) & 0x0f
-		return hs1+hs0;
-	}
 
 
     /** **************************************************************************************************** **

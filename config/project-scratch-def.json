@@ -1,7 +1,6 @@
 {
 	"orgName": "Lightweight - REST Util - Scratch Org",
 	"edition": "Enterprise",
-    "release": "preview",
 	"features": [
 		"EnableSetPasswordInApi",
         "PersonAccounts",

@@ -5,13 +5,13 @@ REM *****************************
 REM Package Create Config
 SET devHub=devHubAlias
 SET packageName=Lightweight - REST Util
-SET packageDescription=A lightweight Apex utility for executing (Salesforce) REST based APIs
+SET packageDescription=A lightweight Apex utility for executing (Salesforce / Data Cloud) REST based APIs
 SET packageType=Managed
 SET packagePath=force-app/package
 
 REM Package Config
 SET packageId=0HoP30000000001KAA
-SET packageVersionId=04tP30000007sN3IAI
+SET packageVersionId=04tP3000000M6gHIAS
 
 REM Create package
 sf package create --name "%packageName%" --description "%packageDescription%" --package-type "%packageType%" --path "%packagePath%" --target-dev-hub %devHub%

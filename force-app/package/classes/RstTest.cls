@@ -11,13 +11,10 @@ private with sharing class RstTest {
     /** **************************************************************************************************** **
      **                                          PRIVATE VARIABLES                                           **
      ** **************************************************************************************************** **/
-    // Package permission set name
-    private static final String PERMISSION_SET_NAME = 'Lightweight_REST_Util';
-
     // Create a test user
     private static final User TST_USER = utl.Tst.createRunAsUser(
         utl.Tst.MINIMUM_ACCESS_PROFILE,
-        PERMISSION_SET_NAME
+        Rst.PERMISSION_SET_NAME
     );
 
 
@@ -173,7 +170,7 @@ private with sharing class RstTest {
 
         // Validate endpoint URL
         Assert.areEqual(
-            URL.getOrgDomainUrl().toExternalForm() + '/services/data/v59.0',
+            URL.getOrgDomainUrl().toExternalForm() + '/services/data/v60.0',
             callout.getRequest().getEndpoint(),
             'Unexpected endpoint value'
         );
@@ -210,14 +207,14 @@ private with sharing class RstTest {
         Test.startTest();
         System.runAs(TST_USER){
             callout = new Rst('ncName',true)
-            .setApiVersion('v59.0')
+            .setApiVersion('v60.0')
             .setupRequest();
         }
         Test.stopTest();
 
         // Validate endpoint URL
         Assert.areEqual(
-            'callout:ncName/services/data/v59.0',
+            'callout:ncName/services/data/v60.0',
             callout.getRequest().getEndpoint(),
             'Unexpected endpoint value'
         );
@@ -701,17 +698,4 @@ private with sharing class RstTest {
         );
     }
 
-
-    @IsTest
-    static void testGuid(){
-		for(Integer x = 0; x < 100; x++) {
-            Assert.areEqual(
-                true,
-                Pattern.compile('[\\w]{8}-[\\w]{4}-4[\\w]{3}-[89ab][\\w]{3}-[\\w]{12}').matcher(Rst.guid()).matches(),
-                'Invalid GUID generated'
-            );
-		}
-    }
-		
-	
 }

@@ -33,7 +33,7 @@ try{
     // Optionally we set the API version to a custom version
     utl.Rst callout = new utl.Rst(true)
     	.setEndpoint('/sobjects/account/describe')
-        .setApiVersion('v59.0')
+        .setApiVersion('v60.0')
         .setHeader('X-PrettyPrint', '1')
     	.call();
     
@@ -99,7 +99,7 @@ try{
 try{
     // Constructor with the baseURl and bearerToken variables to connect to any enpoinnt that requires a token
     utl.Rst callout = new utl.Rst(URL.getOrgDomainUrl().toExternalForm(),UserInfo.getSessionId())
-        .setEndpoint('/services/data/v59.0/sobjects/accounts/describe')
+        .setEndpoint('/services/data/v60.0/sobjects/accounts/describe')
     	.call();
     
     String  responseBody  = callout.getResponse().getBody();
@@ -121,7 +121,7 @@ try{
     utl.Rst callout = new utl.Rst(true)
         .setHandleSfEndpoint(false) // Disable the salesforce base endpoint
         .setHandleSfResponse(false) // Disable any error handling
-    	.setEndpoint('/services/data/v59.0/sobjects/account/describe')
+    	.setEndpoint('/services/data/v60.0/sobjects/account/describe')
     	.setMethod('GET')
     	.call();
     

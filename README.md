@@ -17,25 +17,25 @@ If you use the *managed package* you need to installed the managed package depen
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex Unit Test Util v2|
-|Version|2.3.0-1|
-|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007oePIAQ*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007og1IAA*
+|Version|2.4.0-1|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP3000000M6OXIA0*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP3000000M6Q9IAK*
 |Github URL | https://github.com/jfwberg/lightweight-apex-unit-test-util-v2
 
 ## REST Util - Package info
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex REST Util|
-|Version|0.10.0-1|
-|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP30000007FOvIAM*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP30000007FVNIA2* 
+|Version|0.11.0-1|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP3000000M6gHIAS*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP3000000M6htIAC* 
 
 
 ## Default values
 - Timeout     : 120,000ms
 - HTTP Method : GET
 - Endpoint    : ''
-- API Version : 'v59.0' (Salesforce Constructor Only)
+- API Version : 'v60.0' (Salesforce Constructor Only)
 - Content-Type: 'application/json;charset=UTF-8'
 
 ## Note on Unit tests
@@ -133,10 +133,10 @@ setHandleSfResponse(Boolean handleSfResponse)
 // Set the HTTP Method, (defaults to GET)
 setMethod(String method)
 
-// Set a custom api version for a Salesforce API like 'v59.0'
+// Set a custom api version for a Salesforce API like 'v60.0'
 setApiVersion(String apiVersion)
 
-// Set the endpoint (i.e. /services/data/v59.0/sobjects/account/describe)
+// Set the endpoint (i.e. /services/data/v60.0/sobjects/account/describe)
 setEndpoint(String endpoint)
 
 // Ability to set a custom timeout value (defaults to 120,000)
@@ -273,7 +273,7 @@ try{
     // Optionally we set the API version to a custom version
     utl.Rst callout = new utl.Rst(true)
     	.setEndpoint('/sobjects/account/describe')
-        .setApiVersion('v59.0')
+        .setApiVersion('v60.0')
         .setHeader('X-PrettyPrint', '1')
     	.call();
     
@@ -339,7 +339,7 @@ try{
 try{
     // Constructor with the baseURl and bearerToken variables to connect to any enpoinnt that requires a token
     utl.Rst callout = new utl.Rst(URL.getOrgDomainUrl().toExternalForm(),UserInfo.getSessionId())
-        .setEndpoint('/services/data/v59.0/sobjects/accounts/describe')
+        .setEndpoint('/services/data/v60.0/sobjects/accounts/describe')
     	.call();
     
     String  responseBody  = callout.getResponse().getBody();
@@ -361,7 +361,7 @@ try{
     utl.Rst callout = new utl.Rst(true)
         .setHandleSfEndpoint(false) // Disable the salesforce base endpoint
         .setHandleSfResponse(false) // Disable any error handling
-    	.setEndpoint('/services/data/v59.0/sobjects/account/describe')
+    	.setEndpoint('/services/data/v60.0/sobjects/account/describe')
     	.setMethod('GET')
     	.call();
     
