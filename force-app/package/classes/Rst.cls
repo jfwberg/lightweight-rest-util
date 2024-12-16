@@ -74,7 +74,7 @@ global with sharing class Rst {
     @TestVisible private static final String TEST_API_VERSION = 'v60.0';
 
     // Http methods that require a post body
-    @TestVisible private static final Set<String> METHODS_REQUIRING_BODY = new Set<String>{'POST','PUT','PATCH'};
+    @TestVisible private static final Set<String> METHODS_REQUIRING_BODY = new Set<String>{'POST','PUT','PATCH','DELETE'};
 
     // Error messages
     @TestVisible private static final String UNKNOWN_API_RESPONSE_MSG     = 'Unknown API  Response body: {0}';
@@ -427,7 +427,7 @@ global with sharing class Rst {
         }
 
         // Set the body and Content-Length header for put, post, patch calls
-        if(Rst.METHODS_REQUIRING_BODY.contains(method)){
+        if(String.isNotBlank(this.body) && Rst.METHODS_REQUIRING_BODY.contains(method)){
            
             // Set he request body parameter
             this.request.setBody(this.body);

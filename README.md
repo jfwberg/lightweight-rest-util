@@ -26,9 +26,9 @@ If you use the *managed package* you need to installed the managed package depen
 | Info | Value |
 |---|---|
 |Name|Lightweight - Apex REST Util|
-|Version|0.12.0-1|
-|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP3000000tD33IAE*
-|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP3000000tD6HIAU* 
+|Version|0.13.0-1|
+|Managed Installation URL | */packaging/installPackage.apexp?p0=04tP3000000wMhhIAE*
+|Unlocked Installation URL| */packaging/installPackage.apexp?p0=04tP3000000wMkvIAE* 
 
 
 ## Default values

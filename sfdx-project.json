@@ -4,10 +4,10 @@
       "path": "force-app/package",
       "default": true,
       "package": "Lightweight - REST Util",
-      "versionName": "v62.0 - 0.12",
-      "versionNumber": "0.12.0.NEXT",
+      "versionName": "v62.0 - 0.13",
+      "versionNumber": "0.13.0.NEXT",
       "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
-      "ancestorVersion": "0.11.0",
+      "ancestorVersion": "HIGHEST",
       "dependencies": [
         {
           "package": "Lightweight - Apex Unit Test Util v2@2.5.0-1"
@@ -18,8 +18,8 @@
       "path": "force-app/package",
       "default": false,
       "package": "Lightweight - REST Util (Unlocked)",
-      "versionName": "v62.0 - 0.12",
-      "versionNumber": "0.12.0.NEXT",
+      "versionName": "v62.0 - 0.13",
+      "versionNumber": "0.13.0.NEXT",
       "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
       "dependencies": [
         {
@@ -48,6 +48,8 @@
     "Lightweight - REST Util@0.9.0-1": "04tP30000007FOvIAM",
     "Lightweight - REST Util@0.10.0-1": "04tP30000007sN3IAI",
     "Lightweight - REST Util@0.11.0-1": "04tP3000000M6gHIAS",
+    "Lightweight - REST Util@0.12.0-1": "04tP3000000tD33IAE",
+    "Lightweight - REST Util@0.13.0-1": "04tP3000000wMhhIAE",
     "Lightweight - REST Util (Unlocked)": "0HoP3000000001dKAA",
     "Lightweight - REST Util (Unlocked)@0.1.0-1": "04tP30000003ksjIAA",
     "Lightweight - REST Util (Unlocked)@0.1.0-2": "04tP30000003m1hIAA",
@@ -58,7 +60,7 @@
     "Lightweight - REST Util (Unlocked)@0.9.0-1": "04tP30000007FVNIA2",
     "Lightweight - REST Util (Unlocked)@0.10.0-1": "04tP30000007sQHIAY",
     "Lightweight - REST Util (Unlocked)@0.11.0-1": "04tP3000000M6htIAC",
-    "Lightweight - REST Util@0.12.0-1": "04tP3000000tD33IAE",
-    "Lightweight - REST Util (Unlocked)@0.12.0-1": "04tP3000000tD6HIAU"
+    "Lightweight - REST Util (Unlocked)@0.12.0-1": "04tP3000000tD6HIAU",
+    "Lightweight - REST Util (Unlocked)@0.13.0-1": "04tP3000000wMkvIAE"
   }
 }
