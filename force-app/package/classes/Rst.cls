@@ -77,7 +77,7 @@ global with sharing class Rst {
     @TestVisible private static final Set<String> METHODS_REQUIRING_BODY = new Set<String>{'POST','PUT','PATCH','DELETE'};
 
     // Error messages
-    @TestVisible private static final String UNKNOWN_API_RESPONSE_MSG     = 'Unknown API  Response body: {0}';
+    @TestVisible private static final String UNKNOWN_API_RESPONSE_MSG     = 'Unknown API Response body: {0}';
     @TestVisible private static final String INVALID_NAMED_CREDENTIAL_MSG = 'No NamedCredential record with the DeveloperName "{0}" found in the metadata.';
 
 
@@ -644,7 +644,7 @@ global with sharing class Rst {
                 }
 
                 // Handle error responses
-                when 400, 401, 404, 405, 409, 415, 422, 429, 500 {
+                when 400, 401, 403, 404, 405, 409, 415, 422, 429, 500 {
                    try{
                         // Try to deserialize a JSON response, if this fails throw an exception
                         Object errorResponse = JSON.deserializeUntyped(this.response?.getBody());

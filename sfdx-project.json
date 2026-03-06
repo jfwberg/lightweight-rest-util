@@ -4,13 +4,13 @@
       "path": "force-app/package",
       "default": true,
       "package": "Lightweight - REST Util",
-      "versionName": "v62.0 - 0.13",
-      "versionNumber": "0.13.0.NEXT",
+      "versionName": "v66.0 - 0.14",
+      "versionNumber": "0.14.0.NEXT",
       "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
       "ancestorVersion": "HIGHEST",
       "dependencies": [
         {
-          "package": "Lightweight - Apex Unit Test Util v2@2.5.0-1"
+          "package": "Lightweight - Apex Unit Test Util v2@2.7.0-1"
         }
       ]
     },
@@ -18,12 +18,12 @@
       "path": "force-app/package",
       "default": false,
       "package": "Lightweight - REST Util (Unlocked)",
-      "versionName": "v62.0 - 0.13",
-      "versionNumber": "0.13.0.NEXT",
+      "versionName": "v66.0 - 0.14",
+      "versionNumber": "0.14.0.NEXT",
       "versionDescription": "A lightweight Apex utility for executing (Salesforce) REST based APIs",
       "dependencies": [
         {
-          "package": "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.5.0-1"
+          "package": "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.7.0-1"
         }
       ]
     }
@@ -31,10 +31,10 @@
   "name": "lightweight-rest-util",
   "namespace": "utl",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "62.0",
+  "sourceApiVersion": "66.0",
   "packageAliases": {
-    "Lightweight - Apex Unit Test Util v2@2.5.0-1": "04tP3000000rUmLIAU",
-    "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.5.0-1": "04tP3000000rUpZIAU",
+    "Lightweight - Apex Unit Test Util v2@2.7.0-1": "04tP3000001adwjIAA",
+    "Lightweight - Apex Unit Test Util v2 (Unlocked)@2.7.0-1": "04tP3000001adv7IAA",
     "Lightweight - REST Util": "0HoP30000000001KAA",
     "Lightweight - REST Util@0.1.0-1": "04tP30000003jDVIAY",
     "Lightweight - REST Util@0.1.0-2": "04tP30000003jTdIAI",
@@ -61,6 +61,7 @@
     "Lightweight - REST Util (Unlocked)@0.10.0-1": "04tP30000007sQHIAY",
     "Lightweight - REST Util (Unlocked)@0.11.0-1": "04tP3000000M6htIAC",
     "Lightweight - REST Util (Unlocked)@0.12.0-1": "04tP3000000tD6HIAU",
-    "Lightweight - REST Util (Unlocked)@0.13.0-1": "04tP3000000wMkvIAE"
+    "Lightweight - REST Util (Unlocked)@0.13.0-1": "04tP3000000wMkvIAE",
+    "Lightweight - REST Util (Unlocked)@0.14.0-1": "04tP3000001mG9xIAE"
   }
 }
